@@ -1,4 +1,16 @@
-{{!-- JS Scope Section --}}
-{{js-scope}}
+<article class="container outer-wrapper">
 
-{{outlet}}
+  <div class="col-md-4">
+    <div class="list-group">
+      {{#link-to "index" class="list-group-item"}}
+        Home
+      {{/link-to}}
+      {{#link-to "js-scope" class="list-group-item"}}
+        JS Scope and Classes
+      {{/link-to}}
+    </div>
+  </div>
+  <div class="col-md-8">
+    {{outlet}}
+  </div>
+</article>

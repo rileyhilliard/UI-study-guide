@@ -8,7 +8,9 @@ export default Ember.Component.extend({
     const Bro = {
       first: "bro",
       last: "dozer",
-      full(){ return this.capitize(`${this.first} ${this.last}`); },
+      full() {
+        return this.capitize(`${this.first} ${this.last}`);
+      },
       capitize(str) {
         return str
           .toLowerCase()
@@ -33,6 +35,7 @@ export default Ember.Component.extend({
 
   jsLegacyClass() {
     console.info('-- ES5 CLASS PATTERN --');
+
     function Person(user) {
       // assign all properties from 'user' onto 'this'
       Object.assign(this, user);
@@ -53,7 +56,7 @@ export default Ember.Component.extend({
     // NOTE: if this was assugned above the prototype object assignment, it would
     // be overridden by the assignment @ Person.prototype = {};
     Person.prototype.formattedTitle = function() {
-      const bad =  `bad  scope: ${this.title} - ${this.badSubTitle}`;
+      const bad = `bad  scope: ${this.title} - ${this.badSubTitle}`;
       const good = `good scope: ${this.title} - ${this.goodSubtitle()}`;
       return `${bad}\n${good}`;
     };
@@ -97,7 +100,7 @@ export default Ember.Component.extend({
       }
 
       drink(time) {
-        if(this.flippers) {
+        if (this.flippers) {
           console.log(`${this.name}: I\'m not sure I drink, I live in the water!`);
           return;
         }
@@ -106,7 +109,7 @@ export default Ember.Component.extend({
         console.log(`${this.name} started drinking.`);
       }
 
-      setAction(action, time=false) {
+      setAction(action, time = false) {
         const duration = time || Math.random() * 15000;
         const key = `_${action}`;
         this[action] = true;
@@ -131,14 +134,14 @@ export default Ember.Component.extend({
       // [Instance].eat, rather than [Instance].eat()
       get description() {
         const dontDefault = 'I don\'t have';
-        const type = `I am a ${this.sex} ${this.type} from the ${this.subtype} family.`;
-        const nameAndSound = `My name is ${this.name} and I make sounds like "${this.makeNoise()}"`;
-        const breed = this.breed ? `I am a ${this.breed} breed.` : '';
-        const legs = 'I have ' + (this.legs ? `${this.legs} legs` : `${this.flippers} flippers (and a tail too!)`);
-        const tail = this.tail ? `I have a ${this.tail} tail` : `${dontDefault} a tail`;
-        const ears = this.ears ? `${this.ears} ears.` : `${dontDefault} ears.`;
+        const type = `I am a ${this.sex} ${this.type} from the ${this.subtype} family.\n`;
+        const nameAndSound = `My name is ${this.name} and I make sounds like "${this.makeNoise()}"\n`;
+        const breed = this.breed ? `I am a ${this.breed} breed.\n` : '';
+        const legs = 'I have ' + (this.legs ? `${this.legs} legs` : `${this.flippers} flippers (and a tail too!)\n`);
+        const tail = this.tail ? `I have a ${this.tail} tail` : `${dontDefault} a tail\n`;
+        const ears = this.ears ? `${this.ears} ears.` : `${dontDefault} ears.\n`;
 
-        return console.log(`Hey there!\n${nameAndSound}\n${type}\n${breed}\n${legs}\n${tail} and ${ears}`);
+        return console.log(`Hey there!\n${nameAndSound}${type}${breed}${legs}${tail} and ${ears}`);
       }
     }
 
@@ -168,7 +171,7 @@ export default Ember.Component.extend({
           sound: 'bark',
           type: 'Mammal',
           subtype: 'Canine',
-          tail: 'long',   // default
+          tail: 'long', // default
           ears: 'floppy', // default
         });
 
@@ -234,8 +237,10 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
 
+    console.info('-- JS SCOPE AND CLASSES START --');
     this.objectLiteral();
     this.jsLegacyClass();
     this.ES6Class();
+    console.info('-- JS SCOPE AND CLASSES END --');
   }
 });
